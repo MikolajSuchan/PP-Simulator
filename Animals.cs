@@ -6,10 +6,7 @@ namespace Simulator
     {
         public required string Description { get; init; }
         public uint Size { get; set; } = 3;
-
-        public void Info()
-        {
-            Console.WriteLine($"{Description} <{Size}>");
-        }
+        public string Info => $"{Description} <{Size}>";
     }
 }
+s

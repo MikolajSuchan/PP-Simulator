@@ -11,7 +11,7 @@ internal class Creature
     {
         get;
         set;
-    } = 3;
+    }
     public Creature()
     {
     }
@@ -20,13 +20,10 @@ internal class Creature
         Name = name;
         Level = level;
     }
+    public string Info => $"{Name}[{Level}]";
     public void SayHi()
     {
         Console.WriteLine($"Hi, I'm {Name}, my level is {Level}.");
-    }
-    public void Info()
-    {
-        Console.WriteLine($"Creature name:{Name} Creature level:[{Level}]");
     }
 
 }
