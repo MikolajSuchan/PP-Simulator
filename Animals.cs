@@ -1,6 +1,4 @@
-﻿using System.Xml.Linq;
-
-namespace Simulator
+﻿namespace Simulator
 {
     public class Animals
     {
@@ -34,7 +32,7 @@ namespace Simulator
                 _description = trdescription;
             }
         }
-        public uint Size { get; set; } = 3;
+        public int Size { get; set; } = 3;
         public string Info => $"{Description} <{Size}>";
     }
 }
