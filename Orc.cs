@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Simulator;
+﻿namespace Simulator;
 
 public class Orc : Creature
 {
@@ -17,7 +15,7 @@ public class Orc : Creature
     public int Rage
     {
         get => _rage;
-        init => _rage = Math.Max(0, Math.Min(10, value));
+        init => _rage = Validator.Limiter(value, 0, 10);
     }
 
     public override int Power => Level * 7 + Rage * 3;

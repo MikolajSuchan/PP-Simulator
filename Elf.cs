@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Simulator;
+﻿namespace Simulator;
 
 public class Elf : Creature
 {
@@ -20,7 +18,7 @@ public class Elf : Creature
     public int Agility
     {
         get => _agility;
-        init => _agility = Math.Max(0, Math.Min(10, value));
+        init => _agility = Validator.Limiter(value, 0, 10);
     }
 
     public override int Power => Level * 8 + Agility * 2;

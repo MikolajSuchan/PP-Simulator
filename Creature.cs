@@ -11,27 +11,7 @@ public abstract class Creature
         get=>_name;
         init
         {
-            string trname = value.Trim();
-
-            if (trname.Length < 3)
-            {
-                trname = trname.PadRight(3,'#');
-            }
-            if (trname.Length > 25)
-            {
-                trname = trname.Substring(0, 25).TrimEnd();
-
-                if (trname.Length < 3)
-                {
-                    trname = trname.PadRight(3, '#');
-                }
-            }
-            if (char.IsLower(trname[0]))
-            {
-                trname = char.ToUpper(trname[0]) + trname.Substring(1);
-            }
-
-            _name = trname;
+            _name = Validator.Shortener(value, 3, 25, '#');
         }
     }
     public int Level
@@ -39,7 +19,7 @@ public abstract class Creature
         get=>_level ;
         init
         {
-            _level = Math.Max(1, Math.Min(10, value));
+            _level = Validator.Limiter(value, 1, 10);
         }
     }
     public Creature()
@@ -53,6 +33,11 @@ public abstract class Creature
     public abstract string Info { get; }
     public abstract int Power { get; }
     public abstract void SayHi();
+    public override string ToString()
+    {
+        return $"{GetType().Name.ToUpper()}: {Info}";
+    }
+
 
     public void Upgrade()
     {
