@@ -1,4 +1,6 @@
-﻿namespace Simulator
+﻿using Simulator.Maps;
+
+namespace Simulator
 {
     internal class Program
     {
@@ -6,6 +8,7 @@
         {
             Console.WriteLine("Starting Simulator\n");
             Lab5a();
+            Lab5b();
 
             //Point p = new(10, 25);
             //Console.WriteLine(p.Next(Direction.Right));          // (11, 25)
@@ -38,6 +41,30 @@
                 catch (ArgumentException ex)
                 {
                     Console.WriteLine($"{ex.Message}");
+                }
+            }
+
+            static void Lab5b()
+            {
+                try
+                {
+                    SmallSquareMap samplemap1 = new SmallSquareMap(15);
+
+                    Point samplepoint1 = new Point(15, 15);
+
+                    Console.WriteLine(samplemap1.NextDiagonal(samplepoint1, Direction.Right)); 
+
+                    Console.WriteLine(samplemap1.Exist(new Point(14, 14)));  
+                    
+                    Console.WriteLine(samplemap1.Exist(new Point(15, 15)));
+
+                    SmallSquareMap samplemap2 = new SmallSquareMap(25);
+
+
+                }
+                catch (ArgumentOutOfRangeException ex)
+                {
+                    Console.WriteLine($"Error: {ex.Message}");
                 }
             }
 
