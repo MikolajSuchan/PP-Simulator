@@ -5,64 +5,43 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Starting Simulator\n");
-            Lab4a();
-            Lab4b();
+            Lab5a();
+
+            //Point p = new(10, 25);
+            //Console.WriteLine(p.Next(Direction.Right));          // (11, 25)
+            //Console.WriteLine(p.NextDiagonal(Direction.Right));  // (11, 24)
+                                                                 
 
 
-        }
-        static void Lab4a()
-        {
-            Console.WriteLine("HUNT TEST\n");
-            var o = new Orc() { Name = "Gorbag", Rage = 7 };
-            o.SayHi();
-            for (int i = 0; i < 10; i++)
+            static void Lab5a()
             {
-                o.Hunt();
-                o.SayHi();
+                try
+                {
+                    Rectangle kwa1 = new Rectangle(10, 10, 14, 14);
+
+                    Console.WriteLine(kwa1);  
+
+                    Rectangle kwa2 = new Rectangle(new Point(4, 4), new Point(7, 7));
+
+                    Console.WriteLine(kwa2);
+
+                    Point randpoint = new Point(4, 4);
+
+                    Console.WriteLine(kwa1.Contains(randpoint));  //false
+
+                    Console.WriteLine(kwa2.Contains(randpoint));  //true
+
+                    
+                    Rectangle kwa3 = new Rectangle(2, 2, 2, 5); //chudy prostokąt
+                                                                //
+                }
+                catch (ArgumentException ex)
+                {
+                    Console.WriteLine($"{ex.Message}");
+                }
             }
 
-            Console.WriteLine("\nSING TEST\n");
-            var e = new Elf("Legolas", agility: 2);
-            e.SayHi();
-            for (int i = 0; i < 10; i++)
-            {
-                e.Sing();
-                e.SayHi();
-            }
 
-            Console.WriteLine("\nPOWER TEST\n");
-            Creature[] creatures = {
-        o,
-        e,
-        new Orc("Morgash", 3, 8),
-        new Elf("Elandor", 5, 3)
-    };
-            foreach (Creature creature in creatures)
-            {
-                Console.WriteLine($"{creature.Name,-15}: {creature.Power}");
-            }
-
-            Creature c = new Elf("Elandor", 5, 3);
-            Console.WriteLine(c);
-        }
-
-        static void Lab4b()
-        {
-            object[] myObjects = {
-        new Animals() { Description = "dogs"},
-        new Birds { Description = "  eagles ", Size = 10 },
-        new Elf("e", 15, -3),
-        new Orc("morgash", 6, 4)
-    };
-            Console.WriteLine("\nMy objects:");
-            foreach (var o in myObjects) Console.WriteLine(o);
-            /*
-                My objects:
-                ANIMALS: Dogs <3>
-                BIRDS: Eagles (fly+) <10>
-                ELF: E## [10][0]
-                ORC: Morgash [6][4]
-            */
         }
 
     }

@@ -1,5 +1,4 @@
-﻿using Simulator;
-using System.Drawing;
+﻿namespace Simulator;
 
 public class Birds : Animals
 {
