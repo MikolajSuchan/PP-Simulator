@@ -24,7 +24,6 @@
             }
         }
 
-        // rotate given direction 45 degrees clockwise
         public Point NextDiagonal(Direction direction)
         {
             switch (direction)
