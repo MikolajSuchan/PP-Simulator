@@ -6,11 +6,9 @@ public abstract class Creature
 
     private int _level = 1;
 
-    public Map? map { get;private set; }
+    public Map? Map { get;private set; }
 
-    public Point position { get; private set; }
-
-    public void InitMapAndPosition(Map map,Point position) { }
+    public Point? Position { get; private set; }
 
     public string Name
     {
@@ -36,6 +34,7 @@ public abstract class Creature
         Name = name;
         Level = level;
     }
+
     public abstract string Info { get; }
     public abstract int Power { get; }
     public abstract string Greeting();
@@ -53,33 +52,36 @@ public abstract class Creature
         }
     }
 
+    public void InitMapAndPosition(Map map, Point position)
+    {
+        if (!map.Exist(position))
+            throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
+
+        Map = map;
+        Position = position;
+        Map.Add(this, position); 
+    }
+
     public string Go(Direction direction)
-        //Map.Next();
-        //Map.Next()==position->Next brak ruchu;
-
-        //Map.Move();
-
-
-
-        => $"{direction.ToString().ToLower()}";
-
-
-    //out
-    public string[] Go(Direction[] directions)
     {
-        string[] rand= new string[directions.Length];
-        for (int x = 0; x < directions.Length; x++)
+        if (Map == null || Position == null)
+            throw new InvalidOperationException("Stór nir jest na mapie");
+
+
+        var newPosition = Map.Next(Position.Value, direction);
+
+        if (Map.Exist(newPosition))
         {
-            rand[x] = Go(directions[x]);
+            Map.Move(this, Position.Value, newPosition); 
+            Position = newPosition; 
+            return $"Ruch na {direction.ToString().ToLower()}"; 
         }
+        else
+        {
+            return $"Ruch na {direction.ToString().ToLower()} jest niepoprawny ";
+        }
+    }
 
-        return rand;
-    }
-    //out
-    public string[] Go(string directions)
-    {
-        var directionArray = DirectionParser.Parse(directions);
-        return Go(directionArray);
-    }
+
 
 }

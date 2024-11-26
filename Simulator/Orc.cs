@@ -1,6 +1,8 @@
-﻿namespace Simulator;
+﻿using Simulator.Maps;
 
-public class Orc : Creature
+namespace Simulator;
+
+public class Orc: Creature
 {
     private int _huntCounter = 0;
     private int _rage;

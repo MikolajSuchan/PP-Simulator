@@ -1,4 +1,4 @@
-﻿namespace Simulator;
+﻿namespace Simulator.Maps;
 
 public class Elf : Creature
 {
