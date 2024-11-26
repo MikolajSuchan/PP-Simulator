@@ -21,6 +21,9 @@ namespace TestSimulator
         [InlineData("test", 5, 10, 'x', "Testx")]
         [InlineData("short", 5, 10, 'x', "Short")]
         [InlineData("verylongstring", 5, 10, 'x', "Verylongst")]
+        [InlineData("  ", 5, 10, 'x', "Xxxxx")]
+        [InlineData("", 5, 10, 'x', "Xxxxx")]
+        [InlineData("   test   ", 5, 10, 'x', "Testx")]
         public void Shortener_ShouldReturnCorrectValue(string value, int min, int max, char placeholder, string expected)
         {
             // Act

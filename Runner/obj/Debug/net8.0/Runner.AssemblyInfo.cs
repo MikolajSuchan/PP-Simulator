@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Runner")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d1fed56f7ba420a836541411c9c2ea9aac1be9bc")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+764c768fc3a11e4ad37aa2cd1e03e4fd228ede99")]
 [assembly: System.Reflection.AssemblyProductAttribute("Runner")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Runner")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
