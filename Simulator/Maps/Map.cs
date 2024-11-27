@@ -24,42 +24,42 @@
         }
 
 
-        //Add(Creature,Point)
+        //Add(IMappable,Point)
 
-        public void Add(Creature creature, Point point)
+        public void Add(IMappable mappable, Point point)
         {
             if (!Exist(point))
                 throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
-            OnAdd(creature, point);
+            OnAdd(mappable, point);
         }
 
-        //Remove(Creature,Point)
+        //Remove(IMappable,Point)
 
-        public void Remove(Creature creature, Point point)
+        public void Remove(IMappable mappable, Point point)
         {
             if (!Exist(point))
                 throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
-            OnRemove(creature, point);
+            OnRemove(mappable, point);
         }
 
         //Move()
 
-        public void Move(Creature creature, Point from, Point to)
+        public void Move(IMappable mappable, Point from, Point to)
         {
-            Remove(creature, from);
-            Add(creature, to);
+            Remove(mappable, from);
+            Add(mappable, to);
         }
 
         //At(Point albo x lub y)
 
-        public List<Creature> At(Point point)
+        public List<IMappable> At(Point point)
         {
             if (!Exist(point))
                 throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
             return OnAt(point);
         }
 
-        public List<Creature> At(int x, int y)
+        public List<IMappable> At(int x, int y)
         {
             return At(new Point(x, y)); //To samo co wyżej tylko współrzędne
         }
@@ -89,8 +89,8 @@
         /// <returns>Next point.</returns>
         public abstract Point NextDiagonal(Point p, Direction d);
 
-        protected abstract void OnAdd(Creature creature, Point point);
-        protected abstract void OnRemove(Creature creature, Point point);
-        protected abstract List<Creature> OnAt(Point point);
+        protected abstract void OnAdd(IMappable mappable, Point point);
+        protected abstract void OnRemove(IMappable mappable, Point point);
+        protected abstract List<IMappable> OnAt(Point point);
     }
 }

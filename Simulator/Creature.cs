@@ -1,6 +1,6 @@
 ﻿namespace Simulator.Maps;
 
-public abstract class Creature
+public abstract class Creature:IMappable
 {
     private string _name = "Unknown";
 
@@ -62,7 +62,7 @@ public abstract class Creature
         Map.Add(this, position); 
     }
 
-    public string Go(Direction direction)
+    public void Go(Direction direction)
     {
         if (Map == null || Position == null)
             throw new InvalidOperationException("Stór nir jest na mapie");
@@ -74,12 +74,9 @@ public abstract class Creature
         {
             Map.Move(this, Position.Value, newPosition); 
             Position = newPosition; 
-            return $"Ruch na {direction.ToString().ToLower()}"; 
+            
         }
-        else
-        {
-            return $"Ruch na {direction.ToString().ToLower()} jest niepoprawny ";
-        }
+
     }
 
 
