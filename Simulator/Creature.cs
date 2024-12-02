@@ -1,6 +1,6 @@
 ﻿namespace Simulator.Maps;
 
-public abstract class Creature:IMappable
+public abstract class Creature : IMappable
 {
     private string _name = "Unknown";
 
@@ -9,6 +9,8 @@ public abstract class Creature:IMappable
     public Map? Map { get;private set; }
 
     public Point? Position { get; private set; }
+
+    public abstract char Symbol { get; }
 
     public string Name
     {

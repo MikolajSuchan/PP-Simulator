@@ -39,7 +39,26 @@ public class MapVisualizer
                 }
                 else if (creaturesAtPosition.Count == 1)
                 {
-                    Console.Write(creaturesAtPosition[0] is Orc ? "O" : "E");
+                    var creature = creaturesAtPosition[0];
+
+
+                    if (creature is Orc)
+                    {
+                        Console.Write("O"); // Orc
+                    }
+                    else if (creature is Elf)
+                    {
+                        Console.Write("E"); // Elf
+                    }
+                    else if (creature is Birds bird)
+                    {
+
+                        Console.Write(bird.Symbol);
+                    }
+                    else if (creature is Animals)
+                    {
+                        Console.Write("A"); // Animal
+                    }
                 }
                 else
                 {
