@@ -1,6 +1,5 @@
 ﻿using Simulator.Maps;
 using Simulator;
-using System.Text;
 
 public class MapVisualizer
 {
@@ -11,12 +10,20 @@ public class MapVisualizer
         _map = map;
     }
 
-    public void Draw()
+    public void Draw(bool clearConsole = true)
     {
-        Console.Clear();
-        Console.OutputEncoding = Encoding.UTF8;
+        if (clearConsole)
+        {
+            Console.Clear(); 
+        }
 
-        // Top border
+
+        DrawMap();
+    }
+
+    private void DrawMap()
+    {
+
         Console.Write(Box.TopLeft);
         for (int x = 0; x < _map.SizeX; x++)
         {
@@ -24,7 +31,7 @@ public class MapVisualizer
         }
         Console.WriteLine(Box.TopRight);
 
-        // Body of the map
+
         for (int y = 0; y < _map.SizeY; y++)
         {
             Console.Write(Box.Vertical);
@@ -41,23 +48,21 @@ public class MapVisualizer
                 {
                     var creature = creaturesAtPosition[0];
 
-
                     if (creature is Orc)
                     {
-                        Console.Write("O"); // Orc
+                        Console.Write("O"); 
                     }
                     else if (creature is Elf)
                     {
-                        Console.Write("E"); // Elf
+                        Console.Write("E");
                     }
                     else if (creature is Birds bird)
                     {
-
-                        Console.Write(bird.Symbol);
+                        Console.Write(bird.Symbol); 
                     }
                     else if (creature is Animals)
                     {
-                        Console.Write("A"); // Animal
+                        Console.Write("A"); 
                     }
                 }
                 else
@@ -79,7 +84,6 @@ public class MapVisualizer
             }
         }
 
-        // Bottom border
         Console.Write(Box.BottomLeft);
         for (int x = 0; x < _map.SizeX; x++)
         {
@@ -88,4 +92,3 @@ public class MapVisualizer
         Console.WriteLine(Box.BottomRight);
     }
 }
- 
