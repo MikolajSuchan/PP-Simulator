@@ -5,7 +5,9 @@ public class Program
 {
     public static void Main(string[] args)
     {
-        SmallTorusMap map = new SmallTorusMap(8,6);
+
+        BigBounceMap map = new BigBounceMap(8, 6);
+
 
         List<IMappable> creatures = new List<IMappable>
         {
@@ -15,6 +17,8 @@ public class Program
             new Birds { Description = "Eagles", Size = 5, CanFly = true },
             new Birds { Description = "Ostriches", Size = 4, CanFly = false }
         };
+
+
         List<Point> points = new List<Point>
         {
             new Point(2, 2),
@@ -23,18 +27,21 @@ public class Program
             new Point(5, 1),
             new Point(6, 1),
         };
-        string moves = "udlr"; 
+
+
+        string moves = "uurddlluurddlluurdlrudlruddll";
+        string moves2 = "lllllllll";
+
 
         Simulation simulation = new Simulation(map, creatures, points, moves);
 
-        MapVisualizer mapVisualizer = new MapVisualizer(simulation.Map);
 
+        MapVisualizer mapVisualizer = new MapVisualizer(simulation.Map);
 
 
         mapVisualizer.Draw();
         Console.WriteLine("Press any key to start simulation...");
         Console.ReadKey();
-
 
 
         while (!simulation.Finished)
@@ -49,4 +56,3 @@ public class Program
         Console.WriteLine("Simulation Finished!");
     }
 }
-   
