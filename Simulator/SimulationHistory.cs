@@ -1,68 +1,61 @@
 ﻿using Simulator;
-using Simulator.Maps;
 
 public class SimulationHistory
 {
-    private readonly List<SimulationState> _history = new List<SimulationState>();
-    private readonly Simulation _simulation;
+    private Simulation _simulation { get; }
+    public int SizeX { get; }
+    public int SizeY { get; }
+    public List<SimulationTurnLog> TurnLogs { get; } = new List<SimulationTurnLog>();
 
     public SimulationHistory(Simulation simulation)
     {
-        _simulation = simulation;
+        _simulation = simulation ?? throw new ArgumentNullException(nameof(simulation));
+        SizeX = _simulation.Map.SizeX;
+        SizeY = _simulation.Map.SizeY;
+        Run();
     }
 
-    public void SaveState(int turn)
+    private void Run()
     {
-        var state = new SimulationState
+        while (!_simulation.Finished)
         {
-            Turn = turn,
-            ObjectPositions = new Dictionary<IMappable, Point>(),
-            CurrentMove = _simulation.CurrentMoveName,
-            CurrentMappable = _simulation.CurrentMappable
-        };
-
-
-        foreach (var creature in _simulation.IMappables)
-        {
-            state.ObjectPositions[creature] = creature.Position.Value;
-        }
-
-        _history.Add(state);
-    }
-
-    public void Replay(int turn)
-    {
-        Console.Clear();
-
-        var state = _history.FirstOrDefault(s => s.Turn == turn);
-        if (state != null)
-        {
-
-            foreach (var creature in _simulation.IMappables)
+            var log = new SimulationTurnLog
             {
-                _simulation.Map.Remove(creature, creature.Position.Value);
-            }
-
-            foreach (var entry in state.ObjectPositions)
-            {
-                entry.Key.InitMapAndPosition(_simulation.Map, entry.Value);
-            }
-
-            Console.WriteLine($"Replaying turn {turn}, move: {state.CurrentMove.ToUpper()}");
-
-            Console.WriteLine($"Next Move: {state.CurrentMappable.GetType().Name} will move {state.CurrentMove.ToUpper()}");
-        }
-        else
-        {
-            Console.WriteLine($"No state found for turn {turn}");
+                Mappable = _simulation.CurrentMappable.ToString(),
+                Move = _simulation.CurrentMoveName,
+                Symbols = GenerateSymbolMap()
+            };
+            TurnLogs.Add(log);
+            _simulation.Turn();
         }
     }
 
-    private class SimulationState
+    private Dictionary<Point, char> GenerateSymbolMap()
     {
-        public int Turn { get; set; }
-        public Dictionary<IMappable, Point> ObjectPositions { get; set; }
-        public string CurrentMove { get; set; }
-        public IMappable CurrentMappable { get; set; }
+        var symbols = new Dictionary<Point, char>();
+        for (int x = 0; x < SizeX; x++)
+        {
+            for (int y = 0; y < SizeY; y++)
+            {
+                var creatures = _simulation.Map.At(new Point(x, y));
+                if (creatures.Count > 0)
+                {
+                    symbols[new Point(x, y)] = creatures[0].Symbol;
+                }
+            }
+        }
+        return symbols;
+    }
+
+    /// <summary>
+    /// Udostępnia dane dla konkretnej tury.
+    /// </summary>
+    public SimulationTurnLog GetTurnLog(int turn)
+    {
+        if (turn < 0 || turn >= TurnLogs.Count)
+        {
+            throw new ArgumentOutOfRangeException(nameof(turn), "Niepoprawny numer tury");
+        }
+        return TurnLogs[turn];
     }
 }
