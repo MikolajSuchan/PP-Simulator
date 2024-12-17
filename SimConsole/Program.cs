@@ -37,7 +37,7 @@ public class Program
         Console.WriteLine("Simulation Finished!");
 
         // Wyświetlanie zapisanych stanów
-        foreach (int turn in new[] {0,1, 5, 10, 15, 20 })
+        foreach (int turn in new[] {0,1,2,3,4,5,6,7,8})
         {
             logVisualizer.Draw(turn);
             Console.WriteLine("Press any key for next turn...");

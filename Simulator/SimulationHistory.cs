@@ -33,17 +33,25 @@ public class SimulationHistory
     private Dictionary<Point, char> GenerateSymbolMap()
     {
         var symbols = new Dictionary<Point, char>();
+
         for (int x = 0; x < SizeX; x++)
         {
             for (int y = 0; y < SizeY; y++)
             {
                 var creatures = _simulation.Map.At(new Point(x, y));
-                if (creatures.Count > 0)
+                if (creatures.Count > 1)
                 {
+
+                    symbols[new Point(x, y)] = 'X';
+                }
+                else if (creatures.Count == 1)
+                {
+
                     symbols[new Point(x, y)] = creatures[0].Symbol;
                 }
             }
         }
+
         return symbols;
     }
 
