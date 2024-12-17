@@ -28,42 +28,22 @@ public class Program
         string moves = "uurdrrl";
         Simulation simulation = new Simulation(map, creatures, points, moves);
 
-        // Tworzymy obiekt historii symulacji i zapisujemy wszystkie tury
+        // Tworzymy historię symulacji
         SimulationHistory simulationHistory = new SimulationHistory(simulation);
+
+        // Tworzymy obiekt LogVisualizer
+        LogVisualizer logVisualizer = new LogVisualizer(simulationHistory);
 
         Console.WriteLine("Simulation Finished!");
 
-        // Wyświetlenie stanów dla wybranych tur
-        foreach (int turn in new[] { 5, 10, 15, 20 })
+        // Wyświetlanie zapisanych stanów
+        foreach (int turn in new[] {0,1, 5, 10, 15, 20 })
         {
-            Console.WriteLine($"Turn {turn}:");
-            DisplayTurn(simulationHistory, turn);
+            logVisualizer.Draw(turn);
             Console.WriteLine("Press any key for next turn...");
             Console.ReadKey();
         }
-    }
 
-    private static void DisplayTurn(SimulationHistory history, int turn)
-    {
-        var log = history.GetTurnLog(turn);
-
-        Console.WriteLine($"Turn {turn}: {log.Mappable} moved {log.Move.ToUpper()}");
-
-        for (int y = 0; y < history.SizeY; y++)
-        {
-            for (int x = 0; x < history.SizeX; x++)
-            {
-                var point = new Point(x, y);
-                if (log.Symbols.TryGetValue(point, out char symbol))
-                {
-                    Console.Write(symbol);
-                }
-                else
-                {
-                    Console.Write(" ");
-                }
-            }
-            Console.WriteLine();
-        }
+        Console.WriteLine("End of history playback.");
     }
 }

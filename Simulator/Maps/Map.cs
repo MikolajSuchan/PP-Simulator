@@ -66,7 +66,7 @@
         {
             if (!Exist(point))
                 throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
-            return OnAt(point);
+            return _fields.ContainsKey(point) ? _fields[point] : new List<IMappable>();
         }
 
         public List<IMappable> At(int x, int y)
