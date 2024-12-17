@@ -14,32 +14,6 @@
             _fields = new Dictionary<Point, List<IMappable>>();
         }
 
-        protected override void OnAdd(IMappable mappable, Point point)
-        {
-            if (!_fields.ContainsKey(point))
-            {
-                _fields[point] = new List<IMappable>();
-            }
-            _fields[point].Add(mappable);
-        }
-
-        protected override void OnRemove(IMappable mappable, Point point)
-        {
-            if (_fields.ContainsKey(point))
-            {
-                _fields[point].Remove(mappable);
-                if (_fields[point].Count == 0)
-                {
-                    _fields.Remove(point);
-                }
-            }
-        }
-
-        protected override List<IMappable> OnAt(Point point)
-        {
-            return _fields.ContainsKey(point) ? _fields[point] : new List<IMappable>();
-        }
-
         public override Point Next(Point p, Direction d)
         {
             return d switch

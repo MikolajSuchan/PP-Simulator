@@ -19,17 +19,6 @@
                 }
             }
         }
-        protected override void OnAdd(IMappable mappable, Point point)
-        {
-            _fields[point.X, point.Y].Add(mappable);
-        }
-        protected override void OnRemove(IMappable mappable, Point point)
-        {
-            _fields[point.X, point.Y].Remove(mappable);
-        }
-        protected override List<IMappable> OnAt(Point point)
-        {
-            return _fields[point.X, point.Y];
-        }
+      
     }
 }

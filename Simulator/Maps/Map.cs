@@ -9,6 +9,8 @@
         public int SizeX { get; }
         public int SizeY { get; }
 
+        private readonly Dictionary<Point, List<IMappable>> _fields;
+
         private readonly Rectangle _map;
 
         protected Map(int sizeX, int sizeY)
@@ -20,6 +22,7 @@
             SizeX = sizeX;
             SizeY = sizeY;
             _map = new Rectangle(0, 0, sizeX - 1, sizeY - 1);
+            _fields = new Dictionary<Point, List<IMappable>>();
 
         }
 
@@ -28,18 +31,25 @@
 
         public void Add(IMappable mappable, Point point)
         {
-            if (!Exist(point))
-                throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
-            OnAdd(mappable, point);
+            if (!_fields.ContainsKey(point))
+            {
+                _fields[point] = new List<IMappable>();
+            }
+            _fields[point].Add(mappable);
         }
 
         //Remove(IMappable,Point)
 
         public void Remove(IMappable mappable, Point point)
         {
-            if (!Exist(point))
-                throw new ArgumentOutOfRangeException("Punkt znajduje się poza granicami mapy");
-            OnRemove(mappable, point);
+            if (_fields.ContainsKey(point))
+            {
+                _fields[point].Remove(mappable);
+                if (_fields[point].Count == 0)
+                {
+                    _fields.Remove(point);
+                }
+            }
         }
 
         //Move()
@@ -89,8 +99,5 @@
         /// <returns>Next point.</returns>
         public abstract Point NextDiagonal(Point p, Direction d);
 
-        protected abstract void OnAdd(IMappable mappable, Point point);
-        protected abstract void OnRemove(IMappable mappable, Point point);
-        protected abstract List<IMappable> OnAt(Point point);
     }
 }
