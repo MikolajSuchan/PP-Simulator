@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestSimulator", "TestSimula
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimConsole", "SimConsole\SimConsole.csproj", "{AF6D7F7A-52F7-49FE-B44F-D05FADD0141C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimWeb", "SimWeb\SimWeb.csproj", "{F29260E1-9110-4883-8FDA-58F4F9E22765}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimWeb", "SimWeb\SimWeb.csproj", "{F29260E1-9110-4883-8FDA-58F4F9E22765}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

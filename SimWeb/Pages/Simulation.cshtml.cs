@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace SimWeb.Pages
 {
-    public class IndexModel : PageModel
+    public class SimulationModel : PageModel
     {
         public void OnGet()
         {
-            ViewData["ActivePage"] = "Home";
+            ViewData["ActivePage"] = "Simulation";
         }
     }
 
